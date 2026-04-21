@@ -162,7 +162,3 @@ docker exec proxy apachectl graceful
 | HTML             | Pages web Blue & Green             |
 
 ---
-
-## 📄 Licence
-
-Ce projet est sous licence MIT.
