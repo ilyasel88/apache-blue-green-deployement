@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  proxy:
+    build: ./proxy
+    container_name: apache-router
+    ports:
+      - "8080:80"
+    volumes:
+      - ./proxy/000-default.conf:/usr/local/apache2/conf/extra/000-default.conf
+    depends_on:
+      - blue-site
+      - green-site
+    networks:
+      - blue-green-network
+
+  blue-site:
+    build: ./blue-site
+    container_name: blue-site
+    ports:
+      - "8081:80"
+    networks:
+      - blue-green-network
+
+  green-site:
+    build: ./green-site
+    container_name: green-site
+    ports:
+      - "8082:80"
+    networks:
+      - blue-green-network
+
+networks:
+  blue-green-network:
+    driver: bridge
